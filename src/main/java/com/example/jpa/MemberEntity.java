@@ -8,10 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import lombok.Getter;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.util.StringUtils;
 
 @DynamicUpdate
+@Getter
 @Entity
 @Table(name = "member")
 public class MemberEntity {

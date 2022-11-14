@@ -12,6 +12,16 @@ spring:
     properties:
       hibernate:
         format_sql: true
-logging:
+  application:
+    name: my_spring_boot_app
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
   level:
     "[org.hibernate]": trace
+

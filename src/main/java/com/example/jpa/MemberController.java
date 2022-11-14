@@ -3,16 +3,22 @@ package com.example.jpa;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
 public class MemberController {
 
   private final MemberService memberService;
+
+  @GetMapping
+  public ResponseEntity<List<String>> list() {
+    List<MemberEntity> all = memberService.getAll();
+    return ResponseEntity.ok().body(all.stream().map(MemberEntity::getLastName).collect(Collectors.toList()));
+  }
 
   @PutMapping("/{id}")
   public ResponseEntity<?> update(
